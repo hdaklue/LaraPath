@@ -288,6 +288,7 @@ final class PathBuilder
     {
         /** @var \Illuminate\Contracts\Filesystem\Filesystem&\Illuminate\Contracts\Filesystem\Cloud $storage */
         $storage = Storage::disk($disk);
+
         return $storage->url($this->toString());
     }
 
