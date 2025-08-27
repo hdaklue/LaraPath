@@ -1,5 +1,5 @@
 {
-    "name": "hdaklue/pathbuilder",
+    "name": "hdaklue/larapath",
     "description": "A secure, fluent path builder for PHP with sanitization strategies and Laravel integration",
     "type": "library",
     "keywords": [
@@ -12,7 +12,7 @@
         "fluent",
         "immutable"
     ],
-    "homepage": "https://github.com/hdaklue/pathbuilder",
+    "homepage": "https://github.com/hdaklue/LaraPath",
     "license": "MIT",
     "authors": [
         {
