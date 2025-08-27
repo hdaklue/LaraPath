@@ -24,9 +24,7 @@ jobs:
             testbench: "^10.0"
             pest: "^3.0"
         exclude:
-          # Laravel 12 requires PHP 8.2+, but let's be explicit
-          - laravel: 11.*
-            php: 8.4
+          # No exclusions needed for Laravel 11-12 with PHP 8.2-8.4
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
