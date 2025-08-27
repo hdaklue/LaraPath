@@ -23,8 +23,6 @@ jobs:
           - laravel: 12.*
             testbench: "^10.0"
             pest: "^3.0"
-        exclude:
-          # No exclusions needed for Laravel 11-12 with PHP 8.2-8.4
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
