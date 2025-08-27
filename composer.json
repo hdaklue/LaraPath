@@ -57,7 +57,10 @@
         "laravel": {
             "providers": [
                 "Hdaklue\\PathBuilder\\PathBuilderServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "LaraPath": "Hdaklue\\PathBuilder\\Facades\\LaraPath"
+            }
         }
     },
     "minimum-stability": "stable",
