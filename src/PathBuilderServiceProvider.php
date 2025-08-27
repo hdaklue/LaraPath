@@ -19,7 +19,7 @@ class PathBuilderServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('pathbuilder', fn () => new PathBuilder);
+        $this->app->bind('larapath', fn () => new PathBuilder);
     }
 
     /**
