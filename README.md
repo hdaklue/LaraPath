@@ -214,4 +214,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email hdaklue@example.com instead of using the issue tracker.
+If you discover any security related issues, please email hassan@daklue.com instead of using the issue tracker.
