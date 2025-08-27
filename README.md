@@ -1,4 +1,8 @@
-# PathBuilder
+# LaraPath
+
+[![Tests](https://github.com/hdaklue/LaraPath/workflows/Tests/badge.svg)](https://github.com/hdaklue/LaraPath/actions)
+[![Latest Stable Version](https://poser.pugx.org/hdaklue/larapath/v/stable)](https://packagist.org/packages/hdaklue/larapath)
+[![License](https://poser.pugx.org/hdaklue/larapath/license)](https://packagist.org/packages/hdaklue/larapath)
 
 A secure, fluent path builder for PHP with sanitization strategies and Laravel integration.
 
