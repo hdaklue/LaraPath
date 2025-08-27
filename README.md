@@ -4,6 +4,7 @@
 [![Latest Stable Version](https://poser.pugx.org/hdaklue/larapath/v/stable)](https://packagist.org/packages/hdaklue/larapath)
 [![License](https://poser.pugx.org/hdaklue/larapath/license)](https://packagist.org/packages/hdaklue/larapath)
 
+![Lara Path](img.png)
 A secure, fluent path builder for PHP with sanitization strategies and Laravel 10-12 integration.
 
 ## Features
