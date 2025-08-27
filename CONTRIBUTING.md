@@ -68,7 +68,7 @@ Example: `feat: add custom sanitization strategy support`
 
 ## Security
 
-If you discover a security vulnerability, please send an email to hdaklue@example.com instead of opening a public issue.
+If you discover a security vulnerability, please send an email to hassan@daklue.com instead of opening a public issue.
 
 ## Questions?
 
