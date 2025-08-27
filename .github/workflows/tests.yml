@@ -18,14 +18,14 @@ jobs:
         stability: [prefer-stable]
         include:
           - laravel: 10.*
-            testbench: ^8.0
-            pest: ^2.0
+            testbench: "^8.0"
+            pest: "^2.0"
           - laravel: 11.*
-            testbench: ^9.0
-            pest: ^2.0
+            testbench: "^9.0"
+            pest: "^2.0"
           - laravel: 12.*
-            testbench: ^10.0
-            pest: ^3.0
+            testbench: "^10.0"
+            pest: "^3.0"
         exclude:
           # Laravel 12 requires PHP 8.2+, but let's be explicit
           - laravel: 10.*
