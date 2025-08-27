@@ -1,6 +1,6 @@
 {
     "name": "hdaklue/larapath",
-    "description": "A secure, fluent path builder for PHP with sanitization strategies and Laravel 10-12 integration",
+    "description": "A secure, fluent path builder for PHP with sanitization strategies and Laravel 11-12 integration",
     "type": "library",
     "keywords": [
         "path",
@@ -23,13 +23,13 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0|^12.0"
+        "illuminate/support": "^11.0|^12.0"
     },
     "require-dev": {
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^11.0|^12.0",
         "laravel/pint": "^1.0",
-        "orchestra/testbench": "^10.0",
-        "pestphp/pest": "^3.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^2.0|^3.0",
         "phpstan/phpstan": "^1.10"
     },
     "autoload": {

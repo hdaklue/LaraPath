@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/hdaklue/larapath/license)](https://packagist.org/packages/hdaklue/larapath)
 
 ![Lara Path](img.png)
-A secure, fluent path builder for PHP with sanitization strategies and Laravel 10-12 integration.
+A secure, fluent path builder for PHP with sanitization strategies and Laravel 11-12 integration.
 
 ## Features
 
@@ -201,7 +201,7 @@ $path = PathBuilder::base('files')
 ## Requirements
 
 - PHP ^8.2
-- illuminate/support ^10.0|^11.0|^12.0 (for Laravel integration)
+- illuminate/support ^11.0|^12.0 (for Laravel integration)
 
 ## Testing
 

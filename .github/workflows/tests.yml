@@ -14,12 +14,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.2, 8.3, 8.4]
-        laravel: [10.*, 11.*, 12.*]
+        laravel: [11.*, 12.*]
         stability: [prefer-stable]
         include:
-          - laravel: 10.*
-            testbench: "^8.0"
-            pest: "^2.0"
           - laravel: 11.*
             testbench: "^9.0"
             pest: "^2.0"
@@ -28,8 +25,6 @@ jobs:
             pest: "^3.0"
         exclude:
           # Laravel 12 requires PHP 8.2+, but let's be explicit
-          - laravel: 10.*
-            php: 8.4
           - laravel: 11.*
             php: 8.4
 
