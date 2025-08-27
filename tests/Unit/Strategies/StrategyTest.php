@@ -2,76 +2,70 @@
 
 declare(strict_types=1);
 
-namespace Hdaklue\PathBuilder\Tests\Unit\Strategies;
-
 use Hdaklue\PathBuilder\Strategies\HashedStrategy;
 use Hdaklue\PathBuilder\Strategies\SlugStrategy;
 use Hdaklue\PathBuilder\Strategies\SnakeStrategy;
 use Hdaklue\PathBuilder\Strategies\TimestampStrategy;
-use PHPUnit\Framework\TestCase;
 
-class StrategyTest extends TestCase
-{
-    public function test_hashed_strategy_creates_md5_hash(): void
-    {
+describe('HashedStrategy', function () {
+    it('creates md5 hash', function () {
         $result = HashedStrategy::apply('test@example.com');
 
-        $this->assertEquals(md5('test@example.com'), $result);
-        $this->assertEquals(32, strlen($result)); // MD5 is 32 characters
-    }
+        expect($result)->toBe(md5('test@example.com'))
+            ->and(strlen($result))->toBe(32); // MD5 is 32 characters
+    });
 
-    public function test_hashed_strategy_with_different_algorithm(): void
-    {
+    it('works with different algorithm', function () {
         $result = HashedStrategy::apply('test', 'sha256');
 
-        $this->assertEquals(hash('sha256', 'test'), $result);
-        $this->assertEquals(64, strlen($result)); // SHA256 is 64 characters
-    }
+        expect($result)->toBe(hash('sha256', 'test'))
+            ->and(strlen($result))->toBe(64); // SHA256 is 64 characters
+    });
+});
 
-    public function test_slug_strategy_creates_url_friendly_slug(): void
-    {
+describe('SlugStrategy', function () {
+    it('creates url friendly slug', function () {
         $result = SlugStrategy::apply('My Amazing File!');
 
-        $this->assertEquals('my-amazing-file', $result);
-    }
+        expect($result)->toBe('my-amazing-file');
+    });
 
-    public function test_slug_strategy_handles_special_characters(): void
-    {
+    it('handles special characters', function () {
         $result = SlugStrategy::apply('File with @#$%^&*() characters');
 
-        $this->assertEquals('file-with-characters', $result);
-    }
+        expect($result)->toBe('file-with-characters');
+    });
+});
 
-    public function test_snake_strategy_converts_to_snake_case(): void
-    {
+describe('SnakeStrategy', function () {
+    it('converts to snake case', function () {
         $result = SnakeStrategy::apply('CamelCaseName');
 
-        $this->assertEquals('camel_case_name', $result);
-    }
+        expect($result)->toBe('camel_case_name');
+    });
 
-    public function test_snake_strategy_handles_spaces(): void
-    {
+    it('handles spaces', function () {
         $result = SnakeStrategy::apply('Multiple Word String');
 
-        $this->assertEquals('multiple_word_string', $result);
-    }
+        expect($result)->toBe('multiple_word_string');
+    });
+});
 
-    public function test_timestamp_strategy_appends_timestamp(): void
-    {
+describe('TimestampStrategy', function () {
+    it('appends timestamp', function () {
         $input = 'session';
         $timestamp = time();
 
         $result = TimestampStrategy::apply($input);
 
-        $this->assertStringStartsWith($input.'_', $result);
-        $this->assertStringContainsString((string) $timestamp, $result);
-    }
+        expect($result)->toStartWith($input.'_')
+            ->and($result)->toContain((string) $timestamp);
+    });
 
-    public function test_timestamp_strategy_preserves_original_input(): void
-    {
+    it('preserves original input', function () {
         $input = 'my-file';
         $result = TimestampStrategy::apply($input);
 
-        $this->assertStringStartsWith($input.'_', $result);
-    }
-}
+        expect($result)->toStartWith($input.'_');
+    });
+});

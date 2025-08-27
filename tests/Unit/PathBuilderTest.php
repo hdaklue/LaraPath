@@ -2,214 +2,193 @@
 
 declare(strict_types=1);
 
-namespace Hdaklue\PathBuilder\Tests\Unit;
-
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
 use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
 use Hdaklue\PathBuilder\PathBuilder;
-use PHPUnit\Framework\TestCase;
 
-class PathBuilderTest extends TestCase
-{
-    public function test_base_creates_path_builder_instance(): void
-    {
+describe('PathBuilder Basic Operations', function () {
+    it('creates path builder instance from base', function () {
         $builder = PathBuilder::base('uploads');
 
-        $this->assertEquals('uploads', $builder->toString());
-    }
+        expect($builder->toString())->toBe('uploads');
+    });
 
-    public function test_add_method_appends_path_segments(): void
-    {
+    it('appends path segments with add method', function () {
         $path = PathBuilder::base('uploads')
             ->add('images')
             ->add('avatar.jpg')
             ->toString();
 
-        $this->assertEquals('uploads/images/avatar.jpg', $path);
-    }
+        expect($path)->toBe('uploads/images/avatar.jpg');
+    });
 
-    public function test_automatic_slash_trimming(): void
-    {
+    it('automatically trims slashes', function () {
         $path = PathBuilder::base('/uploads/')
             ->add('/images/')
             ->add('/avatar.jpg/')
             ->toString();
 
-        $this->assertEquals('uploads/images/avatar.jpg', $path);
-    }
+        expect($path)->toBe('uploads/images/avatar.jpg');
+    });
+});
 
-    public function test_hashed_sanitization_strategy(): void
-    {
+describe('PathBuilder Sanitization Strategies', function () {
+    it('applies hashed sanitization strategy', function () {
         $path = PathBuilder::base('uploads')
             ->add('user@email.com', SanitizationStrategy::HASHED)
             ->toString();
 
-        $this->assertEquals('uploads/'.md5('user@email.com'), $path);
-    }
+        expect($path)->toBe('uploads/'.md5('user@email.com'));
+    });
 
-    public function test_slug_sanitization_strategy(): void
-    {
+    it('applies slug sanitization strategy', function () {
         $path = PathBuilder::base('uploads')
             ->add('My Amazing File!', SanitizationStrategy::SLUG)
             ->toString();
 
-        $this->assertEquals('uploads/my-amazing-file', $path);
-    }
+        expect($path)->toBe('uploads/my-amazing-file');
+    });
 
-    public function test_snake_sanitization_strategy(): void
-    {
+    it('applies snake sanitization strategy', function () {
         $path = PathBuilder::base('uploads')
             ->add('CamelCase Name', SanitizationStrategy::SNAKE)
             ->toString();
 
-        $this->assertEquals('uploads/camel_case_name', $path);
-    }
+        expect($path)->toBe('uploads/camel_case_name');
+    });
 
-    public function test_timestamp_sanitization_strategy(): void
-    {
+    it('applies timestamp sanitization strategy', function () {
         $timestamp = time();
 
         $path = PathBuilder::base('temp')
             ->add('session', SanitizationStrategy::TIMESTAMP)
             ->toString();
 
-        $this->assertStringStartsWith('temp/session_', $path);
-        $this->assertStringContainsString((string) $timestamp, $path);
-    }
+        expect($path)->toStartWith('temp/session_')
+            ->and($path)->toContain((string) $timestamp);
+    });
+});
 
-    public function test_immutable_operations(): void
-    {
+describe('PathBuilder Immutability', function () {
+    it('maintains immutable operations', function () {
         $base = PathBuilder::base('uploads');
         $images = $base->add('images');
         $videos = $base->add('videos');
 
-        $this->assertEquals('uploads', $base->toString());
-        $this->assertEquals('uploads/images', $images->toString());
-        $this->assertEquals('uploads/videos', $videos->toString());
-    }
+        expect($base->toString())->toBe('uploads')
+            ->and($images->toString())->toBe('uploads/images')
+            ->and($videos->toString())->toBe('uploads/videos');
+    });
+});
 
-    public function test_get_extension(): void
-    {
+describe('PathBuilder File Operations', function () {
+    it('gets file extension', function () {
         $builder = PathBuilder::base('files/video.mp4');
 
-        $this->assertEquals('mp4', $builder->getExtension());
-    }
+        expect($builder->getExtension())->toBe('mp4');
+    });
 
-    public function test_get_filename(): void
-    {
+    it('gets filename', function () {
         $builder = PathBuilder::base('files/video.mp4');
 
-        $this->assertEquals('video.mp4', $builder->getFilename());
-    }
+        expect($builder->getFilename())->toBe('video.mp4');
+    });
 
-    public function test_get_filename_without_extension(): void
-    {
+    it('gets filename without extension', function () {
         $builder = PathBuilder::base('files/video.mp4');
 
-        $this->assertEquals('video', $builder->getFilenameWithoutExtension());
-    }
+        expect($builder->getFilenameWithoutExtension())->toBe('video');
+    });
 
-    public function test_get_directory_path(): void
-    {
+    it('gets directory path', function () {
         $builder = PathBuilder::base('files/video.mp4');
 
-        $this->assertEquals('files', $builder->getDirectoryPath());
-    }
+        expect($builder->getDirectoryPath())->toBe('files');
+    });
 
-    public function test_replace_extension(): void
-    {
+    it('replaces file extension', function () {
         $newPath = PathBuilder::base('files/video.mp4')
             ->replaceExtension('webm')
             ->toString();
 
-        $this->assertEquals('files/video.webm', $newPath);
-    }
+        expect($newPath)->toBe('files/video.webm');
+    });
+});
 
-    public function test_add_timestamped_dir(): void
-    {
+describe('PathBuilder Directory Operations', function () {
+    it('adds timestamped directory', function () {
         $timestamp = time();
         $path = PathBuilder::base('uploads')
             ->addTimestampedDir()
             ->toString();
 
-        $this->assertStringStartsWith('uploads/', $path);
-        $this->assertStringContainsString((string) $timestamp, $path);
-    }
+        expect($path)->toStartWith('uploads/')
+            ->and($path)->toContain((string) $timestamp);
+    });
 
-    public function test_add_hashed_dir(): void
-    {
+    it('adds hashed directory', function () {
         $path = PathBuilder::base('uploads')
             ->addHashedDir('user123')
             ->toString();
 
-        $this->assertEquals('uploads/'.md5('user123'), $path);
-    }
+        expect($path)->toBe('uploads/'.md5('user123'));
+    });
+});
 
-    public function test_normalize_removes_duplicate_slashes(): void
-    {
+describe('PathBuilder Static Methods', function () {
+    it('normalizes by removing duplicate slashes', function () {
         $normalized = PathBuilder::normalize('uploads//images///avatar.jpg');
 
-        $this->assertEquals('uploads/images/avatar.jpg', $normalized);
-    }
+        expect($normalized)->toBe('uploads/images/avatar.jpg');
+    });
 
-    public function test_is_safe_detects_directory_traversal(): void
-    {
-        $this->assertFalse(PathBuilder::isSafe('../etc/passwd'));
-        $this->assertFalse(PathBuilder::isSafe('uploads/../../../etc/passwd'));
-        $this->assertTrue(PathBuilder::isSafe('uploads/images/avatar.jpg'));
-    }
+    it('detects directory traversal in isSafe', function () {
+        expect(PathBuilder::isSafe('../etc/passwd'))->toBeFalse()
+            ->and(PathBuilder::isSafe('uploads/../../../etc/passwd'))->toBeFalse()
+            ->and(PathBuilder::isSafe('uploads/images/avatar.jpg'))->toBeTrue();
+    });
 
-    public function test_validate_throws_exception_for_unsafe_paths(): void
-    {
-        $this->expectException(UnsafePathException::class);
-        $this->expectExceptionMessage('Unsafe path detected');
-
-        PathBuilder::base('uploads')
+    it('throws exception for unsafe paths in validate', function () {
+        expect(fn () => PathBuilder::base('uploads')
             ->add('../../../etc/passwd')
-            ->validate();
-    }
+            ->validate())
+            ->toThrow(UnsafePathException::class, 'Unsafe path detected');
+    });
 
-    public function test_build_static_method(): void
-    {
+    it('builds path from array with build method', function () {
         $path = PathBuilder::build(['uploads', 'images', 'avatar.jpg']);
 
-        $this->assertEquals('uploads/images/avatar.jpg', $path);
-    }
+        expect($path)->toBe('uploads/images/avatar.jpg');
+    });
 
-    public function test_join_static_method(): void
-    {
+    it('joins path segments with join method', function () {
         $path = PathBuilder::join('uploads', 'images', 'avatar.jpg');
 
-        $this->assertEquals('uploads/images/avatar.jpg', $path);
-    }
+        expect($path)->toBe('uploads/images/avatar.jpg');
+    });
 
-    public function test_build_relative_path(): void
-    {
+    it('builds relative path', function () {
         $relative = PathBuilder::buildRelativePath('/var/www/uploads/image.jpg', '/var/www');
 
-        $this->assertEquals('uploads/image.jpg', $relative);
-    }
+        expect($relative)->toBe('uploads/image.jpg');
+    });
+});
 
-    public function test_debug_returns_path_information(): void
-    {
+describe('PathBuilder Debug and Magic Methods', function () {
+    it('returns path information in debug', function () {
         $debug = PathBuilder::base('files/video.mp4')->debug();
 
-        $this->assertIsArray($debug);
-        $this->assertArrayHasKey('segments', $debug);
-        $this->assertArrayHasKey('final_path', $debug);
-        $this->assertArrayHasKey('is_safe', $debug);
-        $this->assertArrayHasKey('extension', $debug);
-        $this->assertArrayHasKey('filename', $debug);
-        $this->assertEquals('files/video.mp4', $debug['final_path']);
-        $this->assertEquals('mp4', $debug['extension']);
-        $this->assertEquals('video.mp4', $debug['filename']);
-        $this->assertTrue($debug['is_safe']);
-    }
+        expect($debug)->toBeArray()
+            ->toHaveKeys(['segments', 'final_path', 'is_safe', 'extension', 'filename'])
+            ->and($debug['final_path'])->toBe('files/video.mp4')
+            ->and($debug['extension'])->toBe('mp4')
+            ->and($debug['filename'])->toBe('video.mp4')
+            ->and($debug['is_safe'])->toBeTrue();
+    });
 
-    public function test_to_string_magic_method(): void
-    {
+    it('converts to string with magic method', function () {
         $builder = PathBuilder::base('uploads')->add('images');
 
-        $this->assertEquals('uploads/images', (string) $builder);
-    }
-}
+        expect((string) $builder)->toBe('uploads/images');
+    });
+});

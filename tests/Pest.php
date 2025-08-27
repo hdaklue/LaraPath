@@ -1,0 +1,63 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Test Case
+|--------------------------------------------------------------------------
+|
+| The closure you provide to your test functions is always bound to a specific PHPUnit test
+| case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
+| need to change it using the "uses()" function to bind a different classes or traits.
+|
+*/
+
+uses(Hdaklue\PathBuilder\Tests\TestCase::class)->in('Feature');
+
+/*
+|--------------------------------------------------------------------------
+| Expectations
+|--------------------------------------------------------------------------
+|
+| When you're writing tests, you often need to check that values meet certain conditions. The
+| "expect()" function gives you access to a set of "expectations" methods that you can use
+| to assert different things. Of course, you may extend the Expectation API at any time.
+|
+*/
+
+expect()->extend('toBeValidPath', function () {
+    return $this->toMatch('/^[a-zA-Z0-9\/._-]+$/');
+});
+
+expect()->extend('toBeHashedPath', function (string $input, string $algorithm = 'md5') {
+    return $this->toBe(hash($algorithm, $input));
+});
+
+expect()->extend('toHavePathStructure', function () {
+    return $this->toHaveKeys(['segments', 'final_path', 'is_safe', 'extension', 'filename']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+|
+| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
+| project that you don't want to repeat in every file. Here you can also expose helpers as
+| global functions to help you to reduce the number of lines of code in your test files.
+|
+*/
+
+function createTestPath(string ...$segments): string
+{
+    return implode('/', $segments);
+}
+
+function createSafeTestPath(): string
+{
+    return 'uploads/images/test-'.time().'.jpg';
+}
+
+function createUnsafeTestPath(): string
+{
+    return '../../../etc/passwd';
+}
