@@ -7,7 +7,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
   array (
     '/Users/home/Code/pathbuilder-package/src/PathBuilder.php' => 
     array (
-      0 => '6cc5f5af57adb3632ac7af0c328fefa38523eb23',
+      0 => '72e239d01c9d2dae51a8e7509f722b4786d1a526',
       1 => 
       array (
         0 => 'hdaklue\\pathbuilder\\pathbuilder',
@@ -143,7 +143,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Users/home/Code/pathbuilder-package/src/Sanitizer.php' => 
     array (
-      0 => '7994f2e21966f0cbde9a700e98f2f51d883e943b',
+      0 => '4f593807d737e8cf5e5160d6dc90b01256ed8a1e',
       1 => 
       array (
         0 => 'hdaklue\\pathbuilder\\sanitizer',
@@ -160,7 +160,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Users/home/Code/pathbuilder-package/src/PathBuilderServiceProvider.php' => 
     array (
-      0 => 'f83222bcc2a7990e37539296f2015c17acbb2fcc',
+      0 => '702c2d01ffb116117077b1527d82e820030c4eb3',
       1 => 
       array (
         0 => 'hdaklue\\pathbuilder\\pathbuilderserviceprovider',
@@ -169,6 +169,81 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       array (
         0 => 'hdaklue\\pathbuilder\\register',
         1 => 'hdaklue\\pathbuilder\\boot',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Users/home/Code/pathbuilder-package/src/Exceptions/InvalidSanitizationStrategyException.php' => 
+    array (
+      0 => 'd53f5d6909f1d7ab9e0e241e10de479a15b316d5',
+      1 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\invalidsanitizationstrategyexception',
+      ),
+      2 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\create',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Users/home/Code/pathbuilder-package/src/Exceptions/PathAlreadyExistsException.php' => 
+    array (
+      0 => 'b8936fc86f6541d94d08f768d35f4d6e9a8a7606',
+      1 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\pathalreadyexistsexception',
+      ),
+      2 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\create',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Users/home/Code/pathbuilder-package/src/Exceptions/UnsafePathException.php' => 
+    array (
+      0 => '01a40daa420d553a65aae02954eecbd455c8e81f',
+      1 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\unsafepathexception',
+      ),
+      2 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\create',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Users/home/Code/pathbuilder-package/src/Exceptions/PathNotFoundException.php' => 
+    array (
+      0 => '652bef4b084a3858941640489b3f7f5155a99779',
+      1 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\pathnotfoundexception',
+      ),
+      2 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\exceptions\\create',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Users/home/Code/pathbuilder-package/src/Facades/LaraPath.php' => 
+    array (
+      0 => 'd1b509089e974ddb473893a7e2a08609186009ff',
+      1 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\facades\\larapath',
+      ),
+      2 => 
+      array (
+        0 => 'hdaklue\\pathbuilder\\facades\\getfacadeaccessor',
       ),
       3 => 
       array (

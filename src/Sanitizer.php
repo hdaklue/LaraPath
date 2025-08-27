@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Hdaklue\PathBuilder;
 
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
-use InvalidArgumentException;
+use Hdaklue\PathBuilder\Exceptions\InvalidSanitizationStrategyException;
 
 /**
  * Path sanitization utility class.
@@ -21,14 +21,14 @@ final class Sanitizer
      * @param  string  $input  Input string
      * @param  SanitizationStrategy|string  $strategy  Strategy to apply
      * @return string Sanitized string
-     * @throws InvalidArgumentException If strategy is invalid
+     * @throws InvalidSanitizationStrategyException If strategy is invalid
      */
     public static function apply(string $input, SanitizationStrategy|string $strategy): string
     {
         $strategyClass = $strategy instanceof SanitizationStrategy ? $strategy->value : $strategy;
 
         if (! class_exists($strategyClass) || ! method_exists($strategyClass, 'apply')) {
-            throw new InvalidArgumentException("Strategy class {$strategyClass} not found or doesn't implement apply() method");
+            throw InvalidSanitizationStrategyException::create($strategyClass);
         }
 
         return $strategyClass::apply($input);

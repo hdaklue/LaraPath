@@ -1957,28 +1957,69 @@ return [
     'fileHash' => '5b90d425dc929d79b115ceb34f2f24ee2297a77e',
     'dependentFiles' => 
     array (
+      0 => '/Users/home/Code/pathbuilder-package/src/Facades/LaraPath.php',
+      1 => '/Users/home/Code/pathbuilder-package/src/PathBuilder.php',
+      2 => '/Users/home/Code/pathbuilder-package/src/Sanitizer.php',
+    ),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/InvalidSanitizationStrategyException.php' => 
+  array (
+    'fileHash' => 'd53f5d6909f1d7ab9e0e241e10de479a15b316d5',
+    'dependentFiles' => 
+    array (
+      0 => '/Users/home/Code/pathbuilder-package/src/Sanitizer.php',
+    ),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/PathAlreadyExistsException.php' => 
+  array (
+    'fileHash' => 'b8936fc86f6541d94d08f768d35f4d6e9a8a7606',
+    'dependentFiles' => 
+    array (
       0 => '/Users/home/Code/pathbuilder-package/src/PathBuilder.php',
-      1 => '/Users/home/Code/pathbuilder-package/src/Sanitizer.php',
+    ),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/PathNotFoundException.php' => 
+  array (
+    'fileHash' => '652bef4b084a3858941640489b3f7f5155a99779',
+    'dependentFiles' => 
+    array (
+      0 => '/Users/home/Code/pathbuilder-package/src/PathBuilder.php',
+    ),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/UnsafePathException.php' => 
+  array (
+    'fileHash' => '01a40daa420d553a65aae02954eecbd455c8e81f',
+    'dependentFiles' => 
+    array (
+      0 => '/Users/home/Code/pathbuilder-package/src/PathBuilder.php',
+    ),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Facades/LaraPath.php' => 
+  array (
+    'fileHash' => 'd1b509089e974ddb473893a7e2a08609186009ff',
+    'dependentFiles' => 
+    array (
     ),
   ),
   '/Users/home/Code/pathbuilder-package/src/PathBuilder.php' => 
   array (
-    'fileHash' => '6cc5f5af57adb3632ac7af0c328fefa38523eb23',
+    'fileHash' => '72e239d01c9d2dae51a8e7509f722b4786d1a526',
     'dependentFiles' => 
     array (
-      0 => '/Users/home/Code/pathbuilder-package/src/PathBuilderServiceProvider.php',
+      0 => '/Users/home/Code/pathbuilder-package/src/Facades/LaraPath.php',
+      1 => '/Users/home/Code/pathbuilder-package/src/PathBuilderServiceProvider.php',
     ),
   ),
   '/Users/home/Code/pathbuilder-package/src/PathBuilderServiceProvider.php' => 
   array (
-    'fileHash' => 'f83222bcc2a7990e37539296f2015c17acbb2fcc',
+    'fileHash' => '702c2d01ffb116117077b1527d82e820030c4eb3',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Users/home/Code/pathbuilder-package/src/Sanitizer.php' => 
   array (
-    'fileHash' => '7994f2e21966f0cbde9a700e98f2f51d883e943b',
+    'fileHash' => '4f593807d737e8cf5e5160d6dc90b01256ed8a1e',
     'dependentFiles' => 
     array (
       0 => '/Users/home/Code/pathbuilder-package/src/PathBuilder.php',
@@ -2152,6 +2193,385 @@ return [
       ),
     )),
   ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/InvalidSanitizationStrategyException.php' => 
+  array (
+    0 => 
+    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
+       'name' => 'Hdaklue\\PathBuilder\\Exceptions\\InvalidSanitizationStrategyException',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+ * Thrown when an invalid or non-existent sanitization strategy is used.
+ */',
+         'namespace' => 'Hdaklue\\PathBuilder\\Exceptions',
+         'uses' => 
+        array (
+          'invalidargumentexception' => 'InvalidArgumentException',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'abstract' => false,
+       'final' => false,
+       'extends' => 'InvalidArgumentException',
+       'implements' => 
+      array (
+      ),
+       'usedTraits' => 
+      array (
+      ),
+       'traitUseAdaptations' => 
+      array (
+      ),
+       'statements' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'create',
+           'phpDoc' => NULL,
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'self',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'strategy',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/PathAlreadyExistsException.php' => 
+  array (
+    0 => 
+    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
+       'name' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+ * Thrown when a path already exists but is required not to exist.
+ */',
+         'namespace' => 'Hdaklue\\PathBuilder\\Exceptions',
+         'uses' => 
+        array (
+          'invalidargumentexception' => 'InvalidArgumentException',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'abstract' => false,
+       'final' => false,
+       'extends' => 'InvalidArgumentException',
+       'implements' => 
+      array (
+      ),
+       'usedTraits' => 
+      array (
+      ),
+       'traitUseAdaptations' => 
+      array (
+      ),
+       'statements' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'create',
+           'phpDoc' => NULL,
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'self',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'path',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+            1 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'disk',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/PathNotFoundException.php' => 
+  array (
+    0 => 
+    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
+       'name' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+ * Thrown when a required path does not exist on the specified storage disk.
+ */',
+         'namespace' => 'Hdaklue\\PathBuilder\\Exceptions',
+         'uses' => 
+        array (
+          'invalidargumentexception' => 'InvalidArgumentException',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'abstract' => false,
+       'final' => false,
+       'extends' => 'InvalidArgumentException',
+       'implements' => 
+      array (
+      ),
+       'usedTraits' => 
+      array (
+      ),
+       'traitUseAdaptations' => 
+      array (
+      ),
+       'statements' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'create',
+           'phpDoc' => NULL,
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'self',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'path',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+            1 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'disk',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Exceptions/UnsafePathException.php' => 
+  array (
+    0 => 
+    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
+       'name' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+ * Thrown when a path contains directory traversal attempts or unsafe patterns.
+ */',
+         'namespace' => 'Hdaklue\\PathBuilder\\Exceptions',
+         'uses' => 
+        array (
+          'invalidargumentexception' => 'InvalidArgumentException',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'abstract' => false,
+       'final' => false,
+       'extends' => 'InvalidArgumentException',
+       'implements' => 
+      array (
+      ),
+       'usedTraits' => 
+      array (
+      ),
+       'traitUseAdaptations' => 
+      array (
+      ),
+       'statements' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'create',
+           'phpDoc' => NULL,
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'self',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'path',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+  ),
+  '/Users/home/Code/pathbuilder-package/src/Facades/LaraPath.php' => 
+  array (
+    0 => 
+    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
+       'name' => 'Hdaklue\\PathBuilder\\Facades\\LaraPath',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+ * LaraPath Facade
+ *
+ * @method static \\Hdaklue\\PathBuilder\\PathBuilder base(string $path, \\Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy|string|null $strategy = null)
+ * @method static string build(array $segments)
+ * @method static string join(string ...$segments)
+ * @method static string normalize(string $path)
+ * @method static bool isSafe(string $path)
+ * @method static string buildRelativePath(string $absolutePath, string $basePath)
+ * @method static string createSecureDirectoryName(string $input, string $algorithm = \'md5\')
+ * @method static string extractFilename(string $path)
+ * @method static string getLastSegment(string $path)
+ * @method static string getFileExtension(string $path)
+ * @method static string extractFilenameWithoutExtension(string $path)
+ * @method static string getDirectoryPathStatic(string $path)
+ *
+ * @see \\Hdaklue\\PathBuilder\\PathBuilder
+ */',
+         'namespace' => 'Hdaklue\\PathBuilder\\Facades',
+         'uses' => 
+        array (
+          'facade' => 'Illuminate\\Support\\Facades\\Facade',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'abstract' => false,
+       'final' => false,
+       'extends' => 'Illuminate\\Support\\Facades\\Facade',
+       'implements' => 
+      array (
+      ),
+       'usedTraits' => 
+      array (
+      ),
+       'traitUseAdaptations' => 
+      array (
+      ),
+       'statements' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getFacadeAccessor',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the registered name of the component.
+     */',
+             'namespace' => 'Hdaklue\\PathBuilder\\Facades',
+             'uses' => 
+            array (
+              'facade' => 'Illuminate\\Support\\Facades\\Facade',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+  ),
   '/Users/home/Code/pathbuilder-package/src/PathBuilder.php' => 
   array (
     0 => 
@@ -2171,10 +2591,12 @@ return [
          'uses' => 
         array (
           'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+          'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+          'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+          'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
           'file' => 'Illuminate\\Support\\Facades\\File',
           'storage' => 'Illuminate\\Support\\Facades\\Storage',
           'str' => 'Illuminate\\Support\\Str',
-          'invalidargumentexception' => 'InvalidArgumentException',
         ),
          'constUses' => 
         array (
@@ -2210,10 +2632,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2271,10 +2695,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2332,10 +2758,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2391,10 +2819,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2430,10 +2860,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2490,10 +2922,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2538,10 +2972,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2575,10 +3011,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2612,10 +3050,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2649,10 +3089,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2686,10 +3128,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2723,10 +3167,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2755,16 +3201,18 @@ return [
      * Validate the current path for security.
      *
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path is unsafe
+     * @throws UnsafePathException If path is unsafe
      */',
              'namespace' => 'Hdaklue\\PathBuilder',
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2794,16 +3242,18 @@ return [
      *
      * @param  string  $disk  Storage disk name
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path doesn\'t exist
+     * @throws PathNotFoundException If path doesn\'t exist
      */',
              'namespace' => 'Hdaklue\\PathBuilder',
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2844,16 +3294,18 @@ return [
      *
      * @param  string  $disk  Storage disk name
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path already exists
+     * @throws PathAlreadyExistsException If path already exists
      */',
              'namespace' => 'Hdaklue\\PathBuilder',
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2899,10 +3351,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2948,10 +3402,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -2997,10 +3453,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3046,10 +3504,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3094,10 +3554,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3131,10 +3593,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3168,10 +3632,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3206,10 +3672,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3255,10 +3723,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3305,10 +3775,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3365,10 +3837,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3414,10 +3888,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3464,10 +3940,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3524,10 +4002,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3573,10 +4053,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3622,10 +4104,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3671,10 +4155,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3720,10 +4206,12 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
+              'pathalreadyexistsexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathAlreadyExistsException',
+              'pathnotfoundexception' => 'Hdaklue\\PathBuilder\\Exceptions\\PathNotFoundException',
+              'unsafepathexception' => 'Hdaklue\\PathBuilder\\Exceptions\\UnsafePathException',
               'file' => 'Illuminate\\Support\\Facades\\File',
               'storage' => 'Illuminate\\Support\\Facades\\Storage',
               'str' => 'Illuminate\\Support\\Str',
-              'invalidargumentexception' => 'InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -3881,7 +4369,7 @@ return [
          'uses' => 
         array (
           'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
-          'invalidargumentexception' => 'InvalidArgumentException',
+          'invalidsanitizationstrategyexception' => 'Hdaklue\\PathBuilder\\Exceptions\\InvalidSanitizationStrategyException',
         ),
          'constUses' => 
         array (
@@ -3912,13 +4400,13 @@ return [
      * @param  string  $input  Input string
      * @param  SanitizationStrategy|string  $strategy  Strategy to apply
      * @return string Sanitized string
-     * @throws InvalidArgumentException If strategy is invalid
+     * @throws InvalidSanitizationStrategyException If strategy is invalid
      */',
              'namespace' => 'Hdaklue\\PathBuilder',
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
-              'invalidargumentexception' => 'InvalidArgumentException',
+              'invalidsanitizationstrategyexception' => 'Hdaklue\\PathBuilder\\Exceptions\\InvalidSanitizationStrategyException',
             ),
              'constUses' => 
             array (
@@ -3975,7 +4463,7 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
-              'invalidargumentexception' => 'InvalidArgumentException',
+              'invalidsanitizationstrategyexception' => 'Hdaklue\\PathBuilder\\Exceptions\\InvalidSanitizationStrategyException',
             ),
              'constUses' => 
             array (
@@ -4021,7 +4509,7 @@ return [
              'uses' => 
             array (
               'sanitizationstrategy' => 'Hdaklue\\PathBuilder\\Enums\\SanitizationStrategy',
-              'invalidargumentexception' => 'InvalidArgumentException',
+              'invalidsanitizationstrategyexception' => 'Hdaklue\\PathBuilder\\Exceptions\\InvalidSanitizationStrategyException',
             ),
              'constUses' => 
             array (

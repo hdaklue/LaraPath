@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Hdaklue\PathBuilder\Tests\Unit;
 
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
+use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
 use Hdaklue\PathBuilder\PathBuilder;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class PathBuilderTest extends TestCase
@@ -161,7 +161,7 @@ class PathBuilderTest extends TestCase
 
     public function test_validate_throws_exception_for_unsafe_paths(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(UnsafePathException::class);
         $this->expectExceptionMessage('Unsafe path detected');
 
         PathBuilder::base('uploads')

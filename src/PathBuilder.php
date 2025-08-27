@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Hdaklue\PathBuilder;
 
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
+use Hdaklue\PathBuilder\Exceptions\PathAlreadyExistsException;
+use Hdaklue\PathBuilder\Exceptions\PathNotFoundException;
+use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 
 /**
  * Path Builder Utility with Fluent API
@@ -210,13 +212,13 @@ final class PathBuilder
      * Validate the current path for security.
      *
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path is unsafe
+     * @throws UnsafePathException If path is unsafe
      */
     public function validate(): self
     {
         $path = $this->toString();
         if (! self::isSafe($path)) {
-            throw new InvalidArgumentException('Unsafe path detected: '.$path);
+            throw UnsafePathException::create($path);
         }
 
         return $this;
@@ -227,13 +229,13 @@ final class PathBuilder
      *
      * @param  string  $disk  Storage disk name
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path doesn't exist
+     * @throws PathNotFoundException If path doesn't exist
      */
     public function mustExist(string $disk = 'local'): self
     {
         $path = $this->toString();
         if (! Storage::disk($disk)->exists($path)) {
-            throw new InvalidArgumentException("Path does not exist: {$path} on disk: {$disk}");
+            throw PathNotFoundException::create($path, $disk);
         }
 
         return $this;
@@ -244,13 +246,13 @@ final class PathBuilder
      *
      * @param  string  $disk  Storage disk name
      * @return self Current instance for chaining
-     * @throws InvalidArgumentException If path already exists
+     * @throws PathAlreadyExistsException If path already exists
      */
     public function mustNotExist(string $disk = 'local'): self
     {
         $path = $this->toString();
         if (Storage::disk($disk)->exists($path)) {
-            throw new InvalidArgumentException("Path already exists: {$path} on disk: {$disk}");
+            throw PathAlreadyExistsException::create($path, $disk);
         }
 
         return $this;
