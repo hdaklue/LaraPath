@@ -15,7 +15,7 @@ A secure, fluent path builder for PHP with sanitization strategies and Laravel i
 ## Installation
 
 ```bash
-composer require hdaklue/pathbuilder
+composer require hdaklue/larapath
 ```
 
 ## Quick Start
@@ -23,12 +23,20 @@ composer require hdaklue/pathbuilder
 ```php
 use Hdaklue\PathBuilder\PathBuilder;
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
+// Or use the facade in Laravel
+use LaraPath;
 
-// Basic usage
+// Basic usage (static)
 $path = PathBuilder::base('uploads')
     ->add('images')
     ->add('avatar.jpg')
     ->toString(); // "uploads/images/avatar.jpg"
+
+// Laravel facade usage (auto-registered)
+$path = LaraPath::base('uploads')
+    ->add('images') 
+    ->add('avatar.jpg')
+    ->toString();
 
 // With sanitization strategies
 $path = PathBuilder::base('uploads')
@@ -81,24 +89,31 @@ $newPath = $builder->replaceExtension('webm')->toString(); // "files/video.webm"
 
 ### Laravel Integration
 
+LaraPath is automatically registered in Laravel applications with facade support and container binding.
+
 ```php
-// Check file existence
-$exists = PathBuilder::base('uploads')
+// Using the facade (recommended for Laravel)
+use LaraPath;
+
+$exists = LaraPath::base('uploads')
     ->add('avatar.jpg')
     ->exists('public'); // Uses Storage::disk('public')->exists()
 
-// Get file size
-$size = PathBuilder::base('files')
+// Using container binding
+$builder = app('larapath');
+$size = $builder->base('files')
     ->add('document.pdf')
     ->size(); // Uses Storage::size()
 
-// Get public URL
+// Using static methods (framework-agnostic)
+use Hdaklue\PathBuilder\PathBuilder;
+
 $url = PathBuilder::base('images')
     ->add('logo.png')
     ->url('public'); // Uses Storage::disk('public')->url()
 
 // Delete file
-$deleted = PathBuilder::base('temp')
+$deleted = LaraPath::base('temp')
     ->add('cache.tmp')
     ->delete(); // Uses Storage::delete()
 ```
