@@ -1,0 +1,10 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "simplified_null_return": false,
+        "phpdoc_no_access": false,
+        "phpdoc_no_package": false,
+        "phpdoc_no_useless_inheritdoc": false,
+        "phpdoc_separation": false
+    }
+}

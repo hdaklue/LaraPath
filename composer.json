@@ -1,0 +1,65 @@
+{
+    "name": "hdaklue/pathbuilder",
+    "description": "A secure, fluent path builder for PHP with sanitization strategies and Laravel integration",
+    "type": "library",
+    "keywords": [
+        "path",
+        "builder",
+        "security",
+        "sanitization",
+        "laravel",
+        "filesystem",
+        "fluent",
+        "immutable"
+    ],
+    "homepage": "https://github.com/hdaklue/pathbuilder",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hdaklue",
+            "email": "hdaklue@example.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0",
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpstan/phpstan": "^1.10",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hdaklue\\PathBuilder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hdaklue\\PathBuilder\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hdaklue\\PathBuilder\\PathBuilderServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
