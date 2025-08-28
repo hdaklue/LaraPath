@@ -51,6 +51,19 @@ $path = PathBuilder::base('uploads')
     ->toString(); // "uploads/a665a45920422f9d417e4867efdc4fb8/my-file.jpg"
 ```
 
+## Real-World Use Cases
+
+For detailed examples of how LaraPath solves critical problems in multi-tenant Laravel applications, see [Real World Problems](real-world-problems.md).
+
+The guide covers 5 essential scenarios:
+- Multi-tenant storage organization with privacy protection
+- Database-friendly storage strategies across multiple disks  
+- File naming conflicts and data loss prevention
+- Cross-platform filename sanitization and migration
+- Team-wide consistency and standardization
+
+Perfect for understanding LaraPath's value in complex Laravel applications.
+
 ## Usage Examples
 
 ### Sanitization Strategies
@@ -202,19 +215,6 @@ $path = PathBuilder::base('files')
 
 - PHP ^8.2
 - illuminate/support ^11.0|^12.0 (for Laravel integration)
-
-## Real-World Use Cases
-
-For detailed examples of how LaraPath solves critical problems in multi-tenant Laravel applications, see [Real World Problems](real-world-problems.md).
-
-The guide covers 5 essential scenarios:
-- Multi-tenant storage organization with privacy protection
-- Database-friendly storage strategies across multiple disks  
-- File naming conflicts and data loss prevention
-- Cross-platform filename sanitization and migration
-- Team-wide consistency and standardization
-
-Perfect for understanding LaraPath's value in complex Laravel applications.
 
 ## Testing
 
