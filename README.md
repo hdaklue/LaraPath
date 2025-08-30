@@ -9,13 +9,15 @@ A secure, fluent path builder for PHP with sanitization strategies and Laravel 1
 
 ## Features
 
-- 🔒 **Security First**: Built-in protection against directory traversal attacks
+- 🔒 **Security First**: Built-in protection against directory traversal attacks with comprehensive validation
 - 🎯 **Fluent API**: Clean, readable path building with method chaining
 - 🔧 **Sanitization Strategies**: Multiple strategies for different use cases (hash, slug, snake_case, timestamp)
+- 📁 **Extension Preservation**: Automatic file extension preservation during sanitization
 - 🚀 **Immutable Operations**: Thread-safe path building with no side effects
-- 🏗️ **Strategy Pattern**: Extensible sanitization system
+- 🏗️ **Strategy Pattern**: Extensible sanitization system with automatic validation
 - 🎨 **Type Safety**: Full type hints and IDE autocompletion
 - 📦 **Laravel Integration**: Optional Laravel Storage facade integration
+- ⚡ **Error Handling**: Comprehensive exception handling with specific error types
 
 ## Installation
 
@@ -68,26 +70,59 @@ Perfect for understanding LaraPath's value in complex Laravel applications.
 
 ### Sanitization Strategies
 
+LaraPath automatically preserves file extensions during sanitization, ensuring your files maintain their proper types.
+
 ```php
-// Hash sensitive data
+// Hash sensitive data (preserves extensions)
 $path = PathBuilder::base('storage')
-    ->add('user@email.com', SanitizationStrategy::HASHED)
-    ->toString(); // "storage/5d41402abc4b2a76b9719d911017c592"
+    ->addFile('user@email.com', SanitizationStrategy::HASHED)
+    ->toString(); // "storage/d549c81aa88e6e76e1f4c141aaae4c6e.com"
 
-// Create URL-friendly names  
+// Create URL-friendly names (preserves extensions)
 $path = PathBuilder::base('uploads')
-    ->add('My Amazing File!', SanitizationStrategy::SLUG)
-    ->toString(); // "uploads/my-amazing-file"
+    ->addFile('My Amazing File!.pdf', SanitizationStrategy::SLUG)
+    ->toString(); // "uploads/my-amazing-file.pdf"
 
-// Convert to snake_case
+// Convert to snake_case (preserves extensions)
 $path = PathBuilder::base('files')
-    ->add('CamelCase Name', SanitizationStrategy::SNAKE)
-    ->toString(); // "files/camel_case_name"
+    ->addFile('CamelCase Name.docx', SanitizationStrategy::SNAKE)
+    ->toString(); // "files/camel_case_name.docx"
 
-// Add timestamps for uniqueness
+// Add timestamps for uniqueness (preserves extensions)
 $path = PathBuilder::base('temp')
-    ->add('session', SanitizationStrategy::TIMESTAMP)
-    ->toString(); // "temp/session_1640995200"
+    ->addFile('session.log', SanitizationStrategy::TIMESTAMP)
+    ->toString(); // "temp/session_1640995200.log"
+
+// Directory names (no extensions to preserve)
+$path = PathBuilder::base('uploads')
+    ->add('User Documents', SanitizationStrategy::SLUG)
+    ->toString(); // "uploads/user-documents"
+```
+
+### File Extension Preservation
+
+All sanitization strategies automatically detect and preserve file extensions:
+
+```php
+// Complex filename with special characters
+$path = PathBuilder::base('documents')
+    ->addFile('My Complex File Name!@#.pdf', SanitizationStrategy::SLUG)
+    ->toString(); // "documents/my-complex-file-name.pdf"
+
+// Multiple dots in filename - preserves only the last extension
+$path = PathBuilder::base('archives')
+    ->addFile('backup.2023.tar.gz', SanitizationStrategy::SLUG)
+    ->toString(); // "archives/backup-2023-tar.gz"
+
+// Files without extensions work normally
+$path = PathBuilder::base('configs')
+    ->addFile('README', SanitizationStrategy::SLUG)
+    ->toString(); // "configs/readme"
+
+// Hidden files (starting with dot)
+$path = PathBuilder::base('configs')
+    ->addFile('.env.example', SanitizationStrategy::SLUG)
+    ->toString(); // "configs/env.example"
 ```
 
 ### Path Operations
@@ -138,18 +173,71 @@ $deleted = LaraPath::base('temp')
 
 ### Validation and Security
 
+LaraPath provides comprehensive security and validation features:
+
 ```php
-// Automatic validation
+// Automatic path validation
 $path = PathBuilder::base('uploads')
     ->add('../../../etc/passwd') // Dangerous path
-    ->validate() // Throws InvalidArgumentException
+    ->validate() // Throws UnsafePathException
     ->toString();
 
 // Manual safety check
 $isSafe = PathBuilder::isSafe('uploads/../dangerous/path'); // false
+$isSafe = PathBuilder::isSafe('uploads/safe/file.txt'); // true
+
+// File existence validation
+$path = PathBuilder::base('uploads')
+    ->addFile('document.pdf')
+    ->mustExist('public') // Throws PathNotFoundException if file doesn't exist
+    ->toString();
+
+$path = PathBuilder::base('uploads')
+    ->addFile('new-file.pdf')
+    ->mustNotExist('public') // Throws PathAlreadyExistsException if file exists
+    ->toString();
+```
+
+### Error Handling
+
+LaraPath throws specific exceptions for different error conditions:
+
+```php
+use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
+use Hdaklue\PathBuilder\Exceptions\PathNotFoundException;
+use Hdaklue\PathBuilder\Exceptions\PathAlreadyExistsException;
+use Hdaklue\PathBuilder\Exceptions\InvalidSanitizationStrategyException;
+
+try {
+    $path = PathBuilder::base('../dangerous')
+        ->addFile('file.txt')
+        ->validate();
+} catch (UnsafePathException $e) {
+    // Handle directory traversal attempt
+    echo "Unsafe path detected: " . $e->getMessage();
+}
+
+try {
+    $path = PathBuilder::base('uploads')
+        ->addFile('missing.txt')
+        ->mustExist('local');
+} catch (PathNotFoundException $e) {
+    // Handle missing file
+    echo "File not found: " . $e->getMessage();
+}
+
+try {
+    $path = PathBuilder::base('uploads')
+        ->add('input', 'InvalidStrategy');
+} catch (InvalidSanitizationStrategyException $e) {
+    // Handle invalid sanitization strategy
+    echo "Invalid strategy: " . $e->getMessage();
+}
 ```
 
 ### Custom Strategies
+
+Create custom sanitization strategies by implementing the `SanitizationStrategyContract`:
 
 ```php
 use Hdaklue\PathBuilder\Contracts\SanitizationStrategyContract;
@@ -166,6 +254,27 @@ class UuidStrategy implements SanitizationStrategyContract
 $path = PathBuilder::base('files')
     ->add('temp-file', UuidStrategy::class)
     ->toString(); // "files/550e8400-e29b-41d4-a716-446655440000"
+```
+
+### Strategy Validation
+
+LaraPath automatically validates that custom strategies implement the required contract:
+
+```php
+// ✅ Valid strategy - implements SanitizationStrategyContract
+$path = PathBuilder::base('files')
+    ->add('input', MyCustomStrategy::class)
+    ->toString();
+
+// ❌ Invalid strategy - throws InvalidSanitizationStrategyException
+$path = PathBuilder::base('files')
+    ->add('input', 'NonExistentStrategy')
+    ->toString(); // Exception: Strategy class NonExistentStrategy not found
+
+// ❌ Invalid strategy - missing contract implementation
+$path = PathBuilder::base('files')
+    ->add('input', \stdClass::class)
+    ->toString(); // Exception: Strategy class stdClass must implement SanitizationStrategyContract interface
 ```
 
 ## API Reference
@@ -206,10 +315,12 @@ $path = PathBuilder::base('files')
 
 ## Available Strategies
 
-- `SanitizationStrategy::HASHED` - MD5 hash of input
-- `SanitizationStrategy::SLUG` - URL-friendly slug
-- `SanitizationStrategy::SNAKE` - snake_case conversion
-- `SanitizationStrategy::TIMESTAMP` - Appends Unix timestamp
+All strategies automatically preserve file extensions when present:
+
+- `SanitizationStrategy::HASHED` - MD5 hash of input (preserves extensions: `user.txt` → `hash.txt`)
+- `SanitizationStrategy::SLUG` - URL-friendly slug (preserves extensions: `My File!.pdf` → `my-file.pdf`)
+- `SanitizationStrategy::SNAKE` - snake_case conversion (preserves extensions: `CamelCase.docx` → `camel_case.docx`)
+- `SanitizationStrategy::TIMESTAMP` - Appends Unix timestamp (preserves extensions: `file.log` → `file_1640995200.log`)
 
 ## Requirements
 

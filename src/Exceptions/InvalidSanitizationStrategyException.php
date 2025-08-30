@@ -15,4 +15,9 @@ class InvalidSanitizationStrategyException extends InvalidArgumentException
     {
         return new self("Strategy class {$strategy} not found or doesn't implement apply() method");
     }
+
+    public static function createForMissingContract(string $strategy): self
+    {
+        return new self("Strategy class {$strategy} must implement SanitizationStrategyContract interface");
+    }
 }

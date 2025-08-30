@@ -112,6 +112,182 @@ describe('Laravel Storage Integration', function () {
     });
 });
 
+describe('Sanitization Strategy Validation', function () {
+    it('throws exception for non-existent strategy class', function () {
+        expect(fn () => PathBuilder::base('uploads')
+            ->add('test', 'NonExistentStrategy'))
+            ->toThrow(\Hdaklue\PathBuilder\Exceptions\InvalidSanitizationStrategyException::class);
+    });
+
+    it('throws exception for class that does not implement contract', function () {
+        expect(fn () => PathBuilder::base('uploads')
+            ->add('test', \stdClass::class))
+            ->toThrow(\Hdaklue\PathBuilder\Exceptions\InvalidSanitizationStrategyException::class, 'must implement SanitizationStrategyContract interface');
+    });
+
+    it('accepts valid strategy enum', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('test', SanitizationStrategy::SLUG)
+            ->toString();
+
+        expect($path)->toBe('uploads/test');
+    });
+
+    it('accepts valid strategy classes', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('test', \Hdaklue\PathBuilder\Strategies\SlugStrategy::class)
+            ->toString();
+
+        expect($path)->toBe('uploads/test');
+    });
+});
+
+describe('Core PathBuilder Functionality', function () {
+    it('clones instances correctly in add method', function () {
+        $original = PathBuilder::base('uploads');
+        $modified = $original->add('test');
+
+        expect($original->toString())->toBe('uploads')
+            ->and($modified->toString())->toBe('uploads/test')
+            ->and($original)->not->toBe($modified);
+    });
+
+    it('modifies instance in addFile method', function () {
+        $builder = PathBuilder::base('uploads');
+        $result = $builder->addFile('test.txt');
+
+        expect($result)->toBe($builder)
+            ->and($builder->toString())->toBe('uploads/test.txt');
+    });
+
+    it('gets extension correctly', function () {
+        $path = PathBuilder::base('uploads')
+            ->addFile('document.pdf');
+
+        expect($path->getExtension())->toBe('pdf');
+    });
+
+    it('gets filename correctly', function () {
+        $path = PathBuilder::base('uploads')
+            ->addFile('document.pdf');
+
+        expect($path->getFilename())->toBe('document.pdf');
+    });
+
+    it('gets filename without extension correctly', function () {
+        $path = PathBuilder::base('uploads')
+            ->addFile('document.pdf');
+
+        expect($path->getFilenameWithoutExtension())->toBe('document');
+    });
+
+    it('gets directory path correctly', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('files')
+            ->addFile('document.pdf');
+
+        expect($path->getDirectoryPath())->toBe('uploads/files');
+    });
+
+    it('replaces extension correctly', function () {
+        $original = PathBuilder::base('uploads')
+            ->addFile('document.pdf');
+        
+        $modified = $original->replaceExtension('txt');
+
+        expect($original->toString())->toBe('uploads/document.pdf')
+            ->and($modified->toString())->toBe('uploads/document.txt')
+            ->and($original)->not->toBe($modified);
+    });
+
+    it('handles trailing slash operations', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('folder')
+            ->ensureTrailing();
+
+        // Note: normalize() removes trailing slashes, so ensureTrailing doesn't show in toString()
+        expect($path->toString())->toBe('uploads/folder');
+        
+        // But the segments should have the trailing slash
+        $debug = $path->debug();
+        expect($debug['segments'])->toContain('folder/');
+
+        $path->removeTrailing();
+        expect($path->toString())->toBe('uploads/folder');
+    });
+
+    it('provides debug information', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('files')
+            ->addFile('document.pdf');
+
+        $debug = $path->debug();
+
+        expect($debug)->toHaveKey('segments')
+            ->and($debug)->toHaveKey('final_path')
+            ->and($debug)->toHaveKey('is_safe')
+            ->and($debug)->toHaveKey('extension')
+            ->and($debug)->toHaveKey('filename')
+            ->and($debug)->toHaveKey('filename_without_ext')
+            ->and($debug)->toHaveKey('directory')
+            ->and($debug['extension'])->toBe('pdf')
+            ->and($debug['is_safe'])->toBeTrue();
+    });
+});
+
+describe('Error Handling and Edge Cases', function () {
+    it('handles empty segments correctly', function () {
+        $path = PathBuilder::base('')
+            ->add('')
+            ->add('uploads')
+            ->toString();
+
+        expect($path)->toBe('uploads');
+    });
+
+    it('normalizes paths with multiple slashes', function () {
+        $normalized = PathBuilder::normalize('uploads///files//document.pdf');
+        
+        expect($normalized)->toBe('uploads/files/document.pdf');
+    });
+
+    it('handles root path normalization', function () {
+        $normalized = PathBuilder::normalize('/');
+        
+        expect($normalized)->toBe('/');
+    });
+
+    it('returns empty string for empty path normalization', function () {
+        $normalized = PathBuilder::normalize('');
+        
+        expect($normalized)->toBe('');
+    });
+
+    it('detects unsafe paths with different patterns', function () {
+        expect(PathBuilder::isSafe('uploads/../../../etc/passwd'))->toBeFalse()
+            ->and(PathBuilder::isSafe('uploads/..\\\\etc\\\\passwd'))->toBeFalse()
+            ->and(PathBuilder::isSafe('uploads/file..name'))->toBeFalse()
+            ->and(PathBuilder::isSafe('uploads/safe/path'))->toBeTrue();
+    });
+
+    it('handles extension replacement on paths without extensions', function () {
+        $path = PathBuilder::base('uploads')
+            ->add('folder')
+            ->replaceExtension('txt');
+
+        expect($path->toString())->toBe('uploads/folder');
+    });
+
+    it('handles extension operations on empty paths', function () {
+        $path = PathBuilder::base('');
+
+        expect($path->getExtension())->toBe('')
+            ->and($path->getFilename())->toBe('')
+            ->and($path->getFilenameWithoutExtension())->toBe('')
+            ->and($path->getDirectoryPath())->toBe('');
+    });
+});
+
 describe('Real-world Laravel Usage Scenarios', function () {
     beforeEach(function () {
         Storage::fake('public');

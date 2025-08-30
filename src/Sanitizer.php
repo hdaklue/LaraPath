@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hdaklue\PathBuilder;
 
+use Hdaklue\PathBuilder\Contracts\SanitizationStrategyContract;
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
 use Hdaklue\PathBuilder\Exceptions\InvalidSanitizationStrategyException;
 
@@ -27,7 +28,16 @@ final class Sanitizer
     {
         $strategyClass = $strategy instanceof SanitizationStrategy ? $strategy->value : $strategy;
 
-        if (! class_exists($strategyClass) || ! method_exists($strategyClass, 'apply')) {
+        if (! class_exists($strategyClass)) {
+            throw InvalidSanitizationStrategyException::create($strategyClass);
+        }
+
+        $reflection = new \ReflectionClass($strategyClass);
+        if (! $reflection->implementsInterface(SanitizationStrategyContract::class)) {
+            throw InvalidSanitizationStrategyException::createForMissingContract($strategyClass);
+        }
+
+        if (! method_exists($strategyClass, 'apply')) {
             throw InvalidSanitizationStrategyException::create($strategyClass);
         }
 
