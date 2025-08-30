@@ -27,11 +27,11 @@ final class TimestampStrategy implements SanitizationStrategyContract
         if (str_contains($input, '.') && pathinfo($input, PATHINFO_EXTENSION)) {
             $filename = pathinfo($input, PATHINFO_FILENAME);
             $extension = pathinfo($input, PATHINFO_EXTENSION);
-            
-            return $filename . '_' . time() . '.' . $extension;
+
+            return $filename.'_'.time().'.'.$extension;
         }
-        
+
         // No extension, append timestamp normally
-        return $input . '_' . time();
+        return $input.'_'.time();
     }
 }

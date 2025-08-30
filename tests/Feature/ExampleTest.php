@@ -192,7 +192,7 @@ describe('Core PathBuilder Functionality', function () {
     it('replaces extension correctly', function () {
         $original = PathBuilder::base('uploads')
             ->addFile('document.pdf');
-        
+
         $modified = $original->replaceExtension('txt');
 
         expect($original->toString())->toBe('uploads/document.pdf')
@@ -207,7 +207,7 @@ describe('Core PathBuilder Functionality', function () {
 
         // Note: normalize() removes trailing slashes, so ensureTrailing doesn't show in toString()
         expect($path->toString())->toBe('uploads/folder');
-        
+
         // But the segments should have the trailing slash
         $debug = $path->debug();
         expect($debug['segments'])->toContain('folder/');
@@ -247,19 +247,19 @@ describe('Error Handling and Edge Cases', function () {
 
     it('normalizes paths with multiple slashes', function () {
         $normalized = PathBuilder::normalize('uploads///files//document.pdf');
-        
+
         expect($normalized)->toBe('uploads/files/document.pdf');
     });
 
     it('handles root path normalization', function () {
         $normalized = PathBuilder::normalize('/');
-        
+
         expect($normalized)->toBe('/');
     });
 
     it('returns empty string for empty path normalization', function () {
         $normalized = PathBuilder::normalize('');
-        
+
         expect($normalized)->toBe('');
     });
 

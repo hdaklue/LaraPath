@@ -27,10 +27,10 @@ final class SnakeStrategy implements SanitizationStrategyContract
         if (str_contains($input, '.') && pathinfo($input, PATHINFO_EXTENSION)) {
             $filename = pathinfo($input, PATHINFO_FILENAME);
             $extension = pathinfo($input, PATHINFO_EXTENSION);
-            
-            return str($filename)->snake()->toString() . '.' . $extension;
+
+            return str($filename)->snake()->toString().'.'.$extension;
         }
-        
+
         // No extension, apply snake_case normally
         return str($input)->snake()->toString();
     }

@@ -113,21 +113,21 @@ describe('File Extension Preservation', function () {
 
         it('works with hashed directories and files', function () {
             $userEmail = 'user@example.com';
-            
+
             $path = PathBuilder::base('uploads')
                 ->add('users')
                 ->add($userEmail, SanitizationStrategy::HASHED)
                 ->addFile('Profile Photo.jpg', SanitizationStrategy::SLUG)
                 ->toString();
 
-            // HASHED strategy treats .com as extension, so hashes only "user@example" 
+            // HASHED strategy treats .com as extension, so hashes only "user@example"
             $expectedHash = hash('md5', 'user@example');
             expect($path)->toBe("uploads/users/{$expectedHash}.com/profile-photo.jpg");
         });
 
         it('works with timestamped files', function () {
             $userFile = 'Report.xlsx';
-            
+
             $path = PathBuilder::base('reports')
                 ->add('monthly')
                 ->addFile($userFile, SanitizationStrategy::TIMESTAMP)
@@ -153,7 +153,7 @@ describe('File Extension Preservation', function () {
                 SanitizationStrategy::SLUG,
                 SanitizationStrategy::SNAKE,
                 SanitizationStrategy::TIMESTAMP,
-                SanitizationStrategy::HASHED
+                SanitizationStrategy::HASHED,
             ];
 
             foreach ($strategies as $strategy) {
