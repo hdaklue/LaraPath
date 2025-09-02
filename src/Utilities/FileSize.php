@@ -11,21 +11,21 @@ final class FileSize
     public static function fromMB(float $megabytes): int
     {
         self::validateInput($megabytes, 'fromMB');
-        
+
         return (int) ($megabytes * 1024 * 1024);
     }
 
     public static function fromGB(float $gigabytes): int
     {
         self::validateInput($gigabytes, 'fromGB');
-        
+
         return (int) ($gigabytes * 1024 * 1024 * 1024);
     }
 
     public static function fromKB(float $kilobytes): int
     {
         self::validateInput($kilobytes, 'fromKB');
-        
+
         return (int) ($kilobytes * 1024);
     }
 
