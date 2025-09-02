@@ -8,6 +8,7 @@ use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
 use Hdaklue\PathBuilder\Exceptions\PathAlreadyExistsException;
 use Hdaklue\PathBuilder\Exceptions\PathNotFoundException;
 use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
+use Hdaklue\PathBuilder\Utilities\FileSize;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -278,6 +279,91 @@ final class PathBuilder
     public function size(string $disk = 'local'): int
     {
         return Storage::disk($disk)->size($this->toString());
+    }
+
+    /**
+     * Get formatted file size from storage.
+     *
+     * @param  string  $disk  Storage disk name
+     * @param  int  $precision  Number of decimal places
+     * @return string Formatted file size
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeFormatted(string $disk = 'local', int $precision = 3): string
+    {
+        return FileSize::format($this->size($disk), $precision);
+    }
+
+    /**
+     * Get file size in kilobytes (binary).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in KB
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInKB(string $disk = 'local'): float
+    {
+        return FileSize::toKB($this->size($disk));
+    }
+
+    /**
+     * Get file size in megabytes (binary).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in MB
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInMB(string $disk = 'local'): float
+    {
+        return FileSize::toMB($this->size($disk));
+    }
+
+    /**
+     * Get file size in gigabytes (binary).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in GB
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInGB(string $disk = 'local'): float
+    {
+        return FileSize::toGB($this->size($disk));
+    }
+
+    /**
+     * Get file size in kilobytes (decimal).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in KB (decimal)
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInKBDecimal(string $disk = 'local'): float
+    {
+        return FileSize::toKBDecimal($this->size($disk));
+    }
+
+    /**
+     * Get file size in megabytes (decimal).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in MB (decimal)
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInMBDecimal(string $disk = 'local'): float
+    {
+        return FileSize::toMBDecimal($this->size($disk));
+    }
+
+    /**
+     * Get file size in gigabytes (decimal).
+     *
+     * @param  string  $disk  Storage disk name
+     * @return float File size in GB (decimal)
+     * @throws \InvalidArgumentException If file size is negative
+     */
+    public function getSizeInGBDecimal(string $disk = 'local'): float
+    {
+        return FileSize::toGBDecimal($this->size($disk));
     }
 
     /**

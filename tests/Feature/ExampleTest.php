@@ -76,6 +76,41 @@ describe('Laravel Storage Integration', function () {
         expect($size)->toBe(strlen('test content'));
     });
 
+    it('gets formatted file size from storage disk', function () {
+        Storage::disk('local')->put('test/large-file.txt', str_repeat('a', 1024 * 1024 * 2)); // 2MB
+
+        $formatted = PathBuilder::base('test/large-file.txt')->getSizeFormatted('local');
+
+        expect($formatted)->toContain('MB');
+    });
+
+    it('gets file size in different units', function () {
+        Storage::disk('local')->put('test/file.txt', str_repeat('a', 2048)); // 2KB
+
+        $path = PathBuilder::base('test/file.txt');
+
+        expect($path->getSizeInKB('local'))->toBe(2.0)
+            ->and($path->getSizeInMB('local'))->toBe(2048 / (1024 * 1024))
+            ->and($path->getSizeInKBDecimal('local'))->toBe(2.048);
+    });
+
+    it('throws exception when FileSize methods receive negative values', function () {
+        expect(fn () => \Hdaklue\PathBuilder\Utilities\FileSize::toKB(-100))
+            ->toThrow(\InvalidArgumentException::class, 'Value cannot be negative in toKB');
+
+        expect(fn () => \Hdaklue\PathBuilder\Utilities\FileSize::toMB(-100))
+            ->toThrow(\InvalidArgumentException::class, 'Value cannot be negative in toMB');
+
+        expect(fn () => \Hdaklue\PathBuilder\Utilities\FileSize::format(-100))
+            ->toThrow(\InvalidArgumentException::class, 'Value cannot be negative in format');
+
+        expect(fn () => \Hdaklue\PathBuilder\Utilities\FileSize::fromKB(-1.5))
+            ->toThrow(\InvalidArgumentException::class, 'Value cannot be negative in fromKB');
+
+        expect(fn () => \Hdaklue\PathBuilder\Utilities\FileSize::fromMB(-2.0))
+            ->toThrow(\InvalidArgumentException::class, 'Value cannot be negative in fromMB');
+    });
+
     it('deletes file from storage disk', function () {
         Storage::disk('local')->put('test/file.txt', 'content');
 

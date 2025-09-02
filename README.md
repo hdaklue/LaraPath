@@ -169,6 +169,15 @@ $url = PathBuilder::base('images')
 $deleted = LaraPath::base('temp')
     ->add('cache.tmp')
     ->delete(); // Uses Storage::delete()
+
+// Get file size in different formats
+$path = LaraPath::base('uploads')->add('document.pdf');
+
+$size = $path->size(); // Raw bytes: 1048576
+$formatted = $path->getSizeFormatted(); // Human readable: "1 MB"
+$sizeInKB = $path->getSizeInKB(); // Binary KB: 1024.0
+$sizeInMB = $path->getSizeInMB(); // Binary MB: 1.0
+$sizeInKBDecimal = $path->getSizeInKBDecimal(); // Decimal KB: 1048.576
 ```
 
 ### Validation and Security
@@ -302,6 +311,13 @@ $path = PathBuilder::base('files')
 - `mustNotExist(string $disk = 'local'): self`
 - `exists(string $disk = 'local'): bool`
 - `size(string $disk = 'local'): int`
+- `getSizeFormatted(string $disk = 'local', int $precision = 3): string`
+- `getSizeInKB(string $disk = 'local'): float`
+- `getSizeInMB(string $disk = 'local'): float`
+- `getSizeInGB(string $disk = 'local'): float`
+- `getSizeInKBDecimal(string $disk = 'local'): float`
+- `getSizeInMBDecimal(string $disk = 'local'): float`
+- `getSizeInGBDecimal(string $disk = 'local'): float`
 - `url(string $disk = 'local'): string`
 - `delete(string $disk = 'local'): bool`
 
