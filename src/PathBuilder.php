@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Hdaklue\PathBuilder;
 
 use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
+use Hdaklue\PathBuilder\Exceptions\InvalidHierarchyException;
 use Hdaklue\PathBuilder\Exceptions\PathAlreadyExistsException;
 use Hdaklue\PathBuilder\Exceptions\PathNotFoundException;
 use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
@@ -25,6 +26,8 @@ use Illuminate\Support\Str;
 final class PathBuilder
 {
     private array $segments = [];
+
+    private bool $fileAdded = false;
 
     /**
      * Create a new PathBuilder instance starting with a base path.
@@ -55,9 +58,14 @@ final class PathBuilder
      * @param  string  $name  Path segment to add
      * @param  SanitizationStrategy|string|null  $strategy  Sanitization strategy
      * @return self New instance for chaining
+     * @throws InvalidHierarchyException If a file has already been added
      */
     public function add(string $name, SanitizationStrategy|string|null $strategy = null): self
     {
+        if ($this->fileAdded) {
+            throw InvalidHierarchyException::create();
+        }
+
         $newInstance = clone $this;
         $sanitizedName = $strategy ? Sanitizer::apply($name, $strategy) : $name;
         $newInstance->segments[] = Sanitizer::sanitizePath(Sanitizer::trimSlashes($sanitizedName));
@@ -76,6 +84,7 @@ final class PathBuilder
     {
         $sanitizedFilename = $strategy ? Sanitizer::apply($filename, $strategy) : $filename;
         $this->segments[] = Sanitizer::sanitizePath(Sanitizer::trimSlashes($sanitizedFilename));
+        $this->fileAdded = true;
 
         return $this;
     }
@@ -84,9 +93,14 @@ final class PathBuilder
      * Add a timestamped directory segment.
      *
      * @return self Current instance for chaining
+     * @throws InvalidHierarchyException If a file has already been added
      */
     public function addTimestampedDir(): self
     {
+        if ($this->fileAdded) {
+            throw InvalidHierarchyException::create();
+        }
+
         $this->segments[] = (string) time();
 
         return $this;
@@ -98,9 +112,14 @@ final class PathBuilder
      * @param  string  $input  Input to hash
      * @param  string  $algorithm  Hash algorithm
      * @return self Current instance for chaining
+     * @throws InvalidHierarchyException If a file has already been added
      */
     public function addHashedDir(string $input, string $algorithm = 'md5'): self
     {
+        if ($this->fileAdded) {
+            throw InvalidHierarchyException::create();
+        }
+
         $this->segments[] = hash($algorithm, Sanitizer::trimSlashes($input));
 
         return $this;
