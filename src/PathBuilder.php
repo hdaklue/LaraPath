@@ -8,6 +8,7 @@ use Hdaklue\PathBuilder\Enums\SanitizationStrategy;
 use Hdaklue\PathBuilder\Exceptions\PathAlreadyExistsException;
 use Hdaklue\PathBuilder\Exceptions\PathNotFoundException;
 use Hdaklue\PathBuilder\Exceptions\UnsafePathException;
+use Hdaklue\PathBuilder\Utilities\ExtensionHelper;
 use Hdaklue\PathBuilder\Utilities\FileSize;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -107,6 +108,7 @@ final class PathBuilder
 
     /**
      * Replace the extension of the last segment (if it's a file).
+     * Properly handles compound extensions like .tar.gz
      *
      * @param  string  $newExt  New extension (with or without dot)
      * @return self New instance for chaining
@@ -122,9 +124,11 @@ final class PathBuilder
         $lastIndex = count($newInstance->segments) - 1;
         $lastSegment = $newInstance->segments[$lastIndex];
 
-        if (str_contains($lastSegment, '.')) {
+        $parts = ExtensionHelper::separateExtension($lastSegment);
+
+        if ($parts['extension'] !== null) {
             $newExt = ltrim($newExt, '.');
-            $newInstance->segments[$lastIndex] = pathinfo($lastSegment, PATHINFO_FILENAME).'.'.$newExt;
+            $newInstance->segments[$lastIndex] = ExtensionHelper::reconstructFilename($parts['name'], $newExt);
         }
 
         return $newInstance;
@@ -132,14 +136,22 @@ final class PathBuilder
 
     /**
      * Get the extension of the current path.
+     * Properly handles compound extensions like .tar.gz
      *
      * @return string File extension or empty string
      */
     public function getExtension(): string
     {
-        $path = $this->toString();
+        if (empty($this->segments)) {
+            return '';
+        }
 
-        return pathinfo($path, PATHINFO_EXTENSION) ?: '';
+        $lastIndex = count($this->segments) - 1;
+        $lastSegment = $this->segments[$lastIndex];
+
+        $parts = ExtensionHelper::separateExtension($lastSegment);
+
+        return $parts['extension'] ?? '';
     }
 
     /**
@@ -149,21 +161,33 @@ final class PathBuilder
      */
     public function getFilename(): string
     {
-        $path = $this->toString();
+        if (empty($this->segments)) {
+            return '';
+        }
 
-        return pathinfo($path, PATHINFO_BASENAME) ?: '';
+        $lastIndex = count($this->segments) - 1;
+
+        return $this->segments[$lastIndex];
     }
 
     /**
      * Get the filename without extension from the current path.
+     * Properly handles compound extensions like .tar.gz
      *
      * @return string Filename without extension or empty string
      */
     public function getFilenameWithoutExtension(): string
     {
-        $path = $this->toString();
+        if (empty($this->segments)) {
+            return '';
+        }
 
-        return pathinfo($path, PATHINFO_FILENAME) ?: '';
+        $lastIndex = count($this->segments) - 1;
+        $lastSegment = $this->segments[$lastIndex];
+
+        $parts = ExtensionHelper::separateExtension($lastSegment);
+
+        return $parts['name'];
     }
 
     /**

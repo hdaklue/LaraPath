@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Hdaklue\PathBuilder\Strategies;
 
 use Hdaklue\PathBuilder\Contracts\SanitizationStrategyContract;
+use Hdaklue\PathBuilder\Utilities\ExtensionHelper;
 
 /**
  * Timestamp sanitization strategy.
@@ -23,15 +24,8 @@ final class TimestampStrategy implements SanitizationStrategyContract
      */
     public static function apply(string $input): string
     {
-        // Check if the input has a file extension
-        if (str_contains($input, '.') && pathinfo($input, PATHINFO_EXTENSION)) {
-            $filename = pathinfo($input, PATHINFO_FILENAME);
-            $extension = pathinfo($input, PATHINFO_EXTENSION);
-
-            return $filename.'_'.time().'.'.$extension;
-        }
-
-        // No extension, append timestamp normally
-        return $input.'_'.time();
+        return ExtensionHelper::sanitizeWithExtension($input, function (string $name): string {
+            return $name.'_'.time();
+        });
     }
 }

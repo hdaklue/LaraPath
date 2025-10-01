@@ -59,12 +59,82 @@ describe('File Extension Preservation', function () {
             expect($path)->toBe('uploads/readme');
         });
 
-        it('preserves only the last extension for multiple dots', function () {
+        it('preserves compound extensions like tar.gz', function () {
             $path = PathBuilder::base('uploads')
                 ->addFile('archive.tar.gz', SanitizationStrategy::SLUG)
                 ->toString();
 
-            expect($path)->toBe('uploads/archivetar.gz');
+            expect($path)->toBe('uploads/archive.tar.gz');
+        });
+
+        it('handles filenames with spaces and single extensions for SLUG', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Document File.pdf', SanitizationStrategy::SLUG)
+                ->toString();
+
+            expect($path)->toBe('uploads/my-document-file.pdf');
+        });
+
+        it('handles filenames with spaces and compound extensions for SLUG', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Backup File.tar.gz', SanitizationStrategy::SLUG)
+                ->toString();
+
+            expect($path)->toBe('uploads/my-backup-file.tar.gz');
+        });
+
+        it('handles filenames with spaces and single extensions for SNAKE', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Document File.pdf', SanitizationStrategy::SNAKE)
+                ->toString();
+
+            expect($path)->toBe('uploads/my_document_file.pdf');
+        });
+
+        it('handles filenames with spaces and compound extensions for SNAKE', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Backup File.tar.gz', SanitizationStrategy::SNAKE)
+                ->toString();
+
+            expect($path)->toBe('uploads/my_backup_file.tar.gz');
+        });
+
+        it('handles filenames with spaces and single extensions for HASHED', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Document File.pdf', SanitizationStrategy::HASHED)
+                ->toString();
+
+            $expectedHash = hash('md5', 'My Document File');
+            expect($path)->toBe("uploads/{$expectedHash}.pdf");
+        });
+
+        it('handles filenames with spaces and compound extensions for HASHED', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Backup File.tar.gz', SanitizationStrategy::HASHED)
+                ->toString();
+
+            $expectedHash = hash('md5', 'My Backup File');
+            expect($path)->toBe("uploads/{$expectedHash}.tar.gz");
+        });
+
+        it('handles filenames with spaces and single extensions for TIMESTAMP', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Document File.pdf', SanitizationStrategy::TIMESTAMP)
+                ->toString();
+
+            expect($path)->toStartWith('uploads/My Document File_')
+                ->and($path)->toEndWith('.pdf')
+                ->and($path)->toMatch('/^uploads\/My Document File_\d+\.pdf$/');
+        });
+
+        it('handles filenames with spaces and compound extensions for TIMESTAMP', function () {
+            $path = PathBuilder::base('uploads')
+                ->addFile('My Backup File.tar.gz', SanitizationStrategy::TIMESTAMP)
+                ->toString();
+
+            expect($path)->toStartWith('uploads/My Backup File_')
+                ->and($path)->toEndWith('.tar.gz')
+                ->and($path)->toMatch('/^uploads\/My Backup File_\d+\.tar\.gz$/');
         });
 
         it('handles hidden files (starting with dot)', function () {

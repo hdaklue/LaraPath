@@ -13,6 +13,20 @@ namespace Hdaklue\PathBuilder\Utilities;
 final class ExtensionHelper
 {
     /**
+     * Known compound extensions that should be preserved together.
+     *
+     * @var array<string>
+     */
+    private static array $compoundExtensions = [
+        'tar.gz',
+        'tar.bz2',
+        'tar.xz',
+        'tar.z',
+        'backup.sql',
+        'backup.gz',
+    ];
+
+    /**
      * Separate filename and extension.
      *
      * @param  string  $filename  The filename to parse
@@ -23,6 +37,21 @@ final class ExtensionHelper
         // Handle empty filename
         if (empty($filename)) {
             return ['name' => '', 'extension' => null];
+        }
+
+        // Check for compound extensions first
+        foreach (self::$compoundExtensions as $compoundExt) {
+            if (str_ends_with(strtolower($filename), '.'.$compoundExt)) {
+                $extensionLength = strlen($compoundExt) + 1; // +1 for the dot
+                $name = substr($filename, 0, -$extensionLength);
+
+                // If name is empty or starts with dot (hidden file), treat as no extension
+                if (empty($name) || $name[0] === '.') {
+                    return ['name' => $filename, 'extension' => null];
+                }
+
+                return ['name' => $name, 'extension' => $compoundExt];
+            }
         }
 
         // Find the last dot in the filename
